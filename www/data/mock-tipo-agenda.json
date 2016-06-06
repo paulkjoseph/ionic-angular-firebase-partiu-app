@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "descricao": "PASSEIO"
+  },
+  {
+    "id": 2,
+    "descricao": "TRABALHO"
+  },
+  {
+    "id": 3,
+    "descricao": "ACADEMICO"
+  },
+  {
+    "id": 4,
+    "descricao": "SAUDE"
+  }
+]
