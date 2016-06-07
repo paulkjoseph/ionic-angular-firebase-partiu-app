@@ -1,5 +1,7 @@
-import { OnInit }  from '@angular/core';
-import { Page, NavParams, NavController, Modal, Platform, ActionSheet, Alert } from 'ionic-angular';
+import { Component, OnInit }  from '@angular/core';
+import { NgClass } from '@angular/common';
+
+import { NavParams, NavController, Modal, Platform, ActionSheet, Alert } from 'ionic-angular';
 
 import { GlobalMethodService } from '../shared';
 
@@ -9,13 +11,15 @@ import { PreferenciaPage } from '../preferencia';
 import { MapaPage } from '../mapa';
 import { RotaPage } from '../rota';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/historico/historico-list.component.html',
-  pipes: [ AgendaFilterPipe ]
+  pipes: [ AgendaFilterPipe ],
+  directives: [ NgClass ]
 })
 export class HistoricoListPage implements OnInit {
   
   titulo: string = "Históricos";
+  todasAgendas: AgendaView[] = [];
   agendas: AgendaView[] = [];
   dados: any;
   filtro: string = '';
@@ -31,11 +35,23 @@ export class HistoricoListPage implements OnInit {
   }
   
   ngOnInit(): void {
-    this.getAgendas(false);
+    this.getAgendas();
   }
   
+  ionViewDidEnter() {
+  }
+
   atualizarLista(): void {
-    this.getAgendas(this.segment === 'favoritas');
+    if (this.segment === 'favoritas') {
+        this.agendas = this.todasAgendas.filter((data: AgendaView) => (new Date(data.dataFim) < new Date()) && data.favorito );
+    } else {
+        this.agendas = this.todasAgendas.filter((data: AgendaView) => new Date(data.dataFim) < new Date());
+    }
+  }
+  
+  marcarComoFavorito(agenda: AgendaView): void {
+    agenda.favorito = !agenda.favorito;
+    this.atualizarLista();
   }
   
   carregarPreferencias(): void {
@@ -50,8 +66,8 @@ export class HistoricoListPage implements OnInit {
       this._globalMethod.carregarPagina(RotaPage, agenda, true, this._navCtrl);
   }
   
-  carregarAgendaDetail(agenda: AgendaView): void {
-      this._globalMethod.carregarPagina(AgendaDetailPage, agenda, true, this._navCtrl);
+  reagendar(agenda: AgendaView): void {
+      this._globalMethod.carregarPagina(AgendaDetailPage, {titulo: 'Reagendar', agenda: agenda}, true, this._navCtrl);
   }
   
   atualizar(refresher) {
@@ -79,7 +95,7 @@ export class HistoricoListPage implements OnInit {
           text: 'Reagendar',
           icon: !this._platform.is('ios') ? 'redo' : null,
           handler: () => {
-            this.carregarAgendaDetail(agenda);
+            this.reagendar(agenda);
           }
         },
         {
@@ -126,10 +142,19 @@ export class HistoricoListPage implements OnInit {
     this._navCtrl.present(confirm);
   }
   
-  private getAgendas(isFavorito: boolean): void {
-    this._service.getAgendasRealidas(isFavorito)
-                  .subscribe((data: AgendaView[]) => this.agendas = data, 
-                              error =>  this._globalMethod.mostrarErro(this.mensagenErro = <any>error, this._navCtrl));
+  private getAgendas(): void {
+    this._service.getAgendasRealidas()
+      .subscribe(
+        (data: AgendaView[]) => { //-- on sucess
+          this.todasAgendas = data;
+        },
+        error => { //-- on error
+          this._globalMethod.mostrarErro(this.mensagenErro = <any>error, this._navCtrl);
+        },
+        () => { //-- on completion
+          this.agendas = this.todasAgendas.filter((data: AgendaView) => new Date(data.dataFim) < new Date());
+        }
+      );
   }
   
 }

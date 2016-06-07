@@ -1,12 +1,12 @@
-import { OnInit }  from '@angular/core';
+import { Component, OnInit }  from '@angular/core';
 
-import { IonicApp, Page, NavParams, ViewController } from 'ionic-angular';
+import { App, NavParams, ViewController } from 'ionic-angular';
 
 import { Tutorial } from './';
 
 import { TutorialDataProvider } from '../../providers/tutorial-data.provider';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/tutorial/tutorial.component.html'
 })
 export class TutorialPage implements OnInit {
@@ -18,7 +18,7 @@ export class TutorialPage implements OnInit {
 
   private mensagenErro: any;
   
-  constructor(private _app: IonicApp, 
+  constructor(private _app: App, 
               private _navParams: NavParams, 
               private _viewCtrl: ViewController,
               private _dataProvider: TutorialDataProvider) {
@@ -29,7 +29,7 @@ export class TutorialPage implements OnInit {
     this.getTutorials();
   }
   
-  onPageDidEnter() {
+  ionViewDidEnter() {
     this._app.setTitle(this.titulo);
   }
   

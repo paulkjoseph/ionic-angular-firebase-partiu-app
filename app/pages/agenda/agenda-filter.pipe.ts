@@ -10,7 +10,7 @@ export class AgendaFilterPipe implements PipeTransform {
     transform(value: AgendaView[], filter: string): AgendaView[] {
         filter = filter ? filter.toLocaleLowerCase() : null;
         return filter ? value.filter((data: AgendaView) =>
-                data.descricao.toLocaleLowerCase().indexOf(filter) !== -1) : value;
+            data.descricao.toLocaleLowerCase().indexOf(filter) !== -1) : value;
     }
-    
+
 }

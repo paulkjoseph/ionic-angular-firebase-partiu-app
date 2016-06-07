@@ -1,8 +1,8 @@
-import { OnInit }  from '@angular/core';
+import { Component, OnInit }  from '@angular/core';
 
-import { IonicApp, Page, NavParams, ViewController } from 'ionic-angular';
+import { App, NavParams, ViewController } from 'ionic-angular';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/desenvolvimento/desenvolvimento.component.html',
 })
 export class DesenvolvimentoPage implements OnInit {
@@ -12,7 +12,7 @@ export class DesenvolvimentoPage implements OnInit {
   
   private mensagenErro: any;
   
-  constructor(private _app: IonicApp, 
+  constructor(private _app: App, 
               private _navParams: NavParams, 
               private _viewCtrl: ViewController) {
     this.dados = _navParams.data;
@@ -22,7 +22,7 @@ export class DesenvolvimentoPage implements OnInit {
     this.titulo = this.dados.title.length === 0 ? this.titulo : this.dados.title;
   }
   
-  onPageDidEnter() {
+  ionViewDidEnter() {
     this._app.setTitle(this.titulo);
   }
   

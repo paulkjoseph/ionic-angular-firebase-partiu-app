@@ -1,11 +1,11 @@
-import { OnInit }  from '@angular/core';
-import { Page, NavParams, ViewController, NavController } from 'ionic-angular';
+import { Component, OnInit }  from '@angular/core';
+import { NavParams, ViewController, NavController } from 'ionic-angular';
 
 import { RotaView } from '../rota';
 
 import { MapaPage } from '../mapa';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/rota-detail/rota-detail.component.html'
 })
 export class RotaDetailPage implements OnInit {
@@ -24,6 +24,9 @@ export class RotaDetailPage implements OnInit {
     this.rota = this._navParams.data;
   }
   
+  ionViewDidEnter() {
+  }
+
   salvar(): void {
     this.dismiss();
   }

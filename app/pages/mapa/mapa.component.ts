@@ -1,12 +1,12 @@
-import { OnInit }  from '@angular/core';
+import { Component, OnInit }  from '@angular/core';
 
-import { Page, NavParams, NavController, Modal } from 'ionic-angular';
+import { NavParams, NavController, Modal } from 'ionic-angular';
 
 import { GlobalMethodService } from '../shared';
 
 import { PreferenciaPage } from '../preferencia';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/mapa/mapa.component.html'
 })
 export class MapaPage implements OnInit {
@@ -26,6 +26,9 @@ export class MapaPage implements OnInit {
     this.carregarMapa();
   }
   
+  ionViewDidEnter() {
+  }
+
   carregarPreferencias(): void {
     this._globalMethod.carregarPagina(PreferenciaPage, this.titulo, true, this._navCtrl);
   }

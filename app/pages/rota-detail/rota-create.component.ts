@@ -1,9 +1,9 @@
-import { OnInit }  from '@angular/core';
-import { Page, NavParams, ViewController } from 'ionic-angular';
+import { Component, OnInit }  from '@angular/core';
+import { NavParams, ViewController } from 'ionic-angular';
 
 import { Rota, Agenda } from '../shared';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/rota-detail/rota-create.component.html'
 })
 export class RotaCreatePage implements OnInit {
@@ -23,6 +23,9 @@ export class RotaCreatePage implements OnInit {
     this.agenda = this._navParams.data;
   }
   
+  ionViewDidEnter() {
+  }
+
   salvar(): void {
     this.dismiss();
   }

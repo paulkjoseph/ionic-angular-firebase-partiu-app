@@ -1,8 +1,8 @@
-import { OnInit }  from '@angular/core';
+import { Component, OnInit }  from '@angular/core';
 
-import { IonicApp, Page, NavParams, ViewController } from 'ionic-angular';
+import { App, NavParams, ViewController } from 'ionic-angular';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/compartilhar/compartilhar.component.html',
 })
 export class CompartilharPage implements OnInit {
@@ -12,7 +12,7 @@ export class CompartilharPage implements OnInit {
   
   private mensagenErro: any;
   
-  constructor(private _app: IonicApp, 
+  constructor(private _app: App, 
               private _navParams: NavParams, 
               private _viewCtrl: ViewController) {
   }
@@ -21,7 +21,7 @@ export class CompartilharPage implements OnInit {
     this.dados = this._navParams.data;
   }
   
-  onPageDidEnter() {
+  ionViewDidEnter() {
     this._app.setTitle(this.titulo);
   }
   

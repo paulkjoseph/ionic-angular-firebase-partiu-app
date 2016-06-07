@@ -1,7 +1,7 @@
-import { OnInit }  from '@angular/core';
+import { Component, OnInit }  from '@angular/core';
 import { FormBuilder, ControlGroup, Control, Validators } from '@angular/common';
 
-import { Page, NavController, MenuController, ViewController, Modal, Events, Loading } from 'ionic-angular';
+import { NavController, MenuController, ViewController, Modal, Events, Loading } from 'ionic-angular';
 
 import { Observable } from 'rxjs/Rx';
 
@@ -14,7 +14,7 @@ import { PostValidator, GlobalMethodService } from '../shared';
 import { PrincipalPage } from '../principal';
 import { PreferenciaPage } from '../preferencia';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/usuario/usuario-login.component.html',
   providers: [UserDataProvider, FirebaseDataProvider]
 })
@@ -47,12 +47,12 @@ export class UsuarioLoginPage implements OnInit {
     this.gerenciarFormulario();
   }
   
-  onPageDidEnter() {
+  ionViewDidEnter() {
     this._menu.enable(false);
     this._events.publish('user:initApp');
   }
 
-  onPageDidLeave() {
+  ionVieweDidLeave() {
     this._menu.enable(true);
     this.dismiss();
   }

@@ -1,9 +1,10 @@
-import { OnInit }  from '@angular/core';
-import { IonicApp, Page, NavParams, ViewController, Platform } from 'ionic-angular';
+import { Component, OnInit }  from '@angular/core';
+
+import { App, NavParams, ViewController, Platform } from 'ionic-angular';
 
 import { Preferencia, PreferenciaService } from './';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/preferencia/preferencia.component.html'
 })
 export class PreferenciaPage implements OnInit {
@@ -17,7 +18,7 @@ export class PreferenciaPage implements OnInit {
   
   private mensagenErro: any;
   
-  constructor(private _app: IonicApp, 
+  constructor(private _app: App, 
               private _navParams: NavParams, 
               private _viewCtrl: ViewController, 
               private _service: PreferenciaService,
@@ -30,7 +31,7 @@ export class PreferenciaPage implements OnInit {
     this.getPontosDeInteresse();
   }
 
-  onPageDidEnter() {
+  ionViewDidEnter() {
     this._app.setTitle(this.titulo);
     this.preferencia = this.preferencias[0];
   }

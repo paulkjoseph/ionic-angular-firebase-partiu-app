@@ -1,6 +1,6 @@
-import { OnInit }  from '@angular/core';
+import { Component, OnInit }  from '@angular/core';
 
-import { Page, NavParams, NavController, Modal, Alert } from 'ionic-angular';
+import { NavParams, NavController, Modal, Alert } from 'ionic-angular';
 
 import { GlobalMethodService } from '../shared';
 
@@ -9,7 +9,7 @@ import { Notificacao, NotificacaoFilterPipe, NotificacaoService } from './';
 import { PreferenciaPage } from '../preferencia';
 import { DesenvolvimentoPage } from '../desenvolvimento';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/notificacao/notificacao.component.html',
   pipes: [ NotificacaoFilterPipe ]
 })
@@ -32,6 +32,9 @@ export class NotificacaoPage implements OnInit {
     this.getNotificacoes();
   }
   
+  ionViewDidEnter() {
+  }
+
   carregarPreferencias(): void {
       this._globalMethod.carregarPagina(PreferenciaPage, this.titulo, true, this._navCtrl);
   }

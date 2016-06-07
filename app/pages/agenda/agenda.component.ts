@@ -1,5 +1,6 @@
-import { OnInit }  from '@angular/core';
-import { Page, NavParams, NavController, Modal, ActionSheet, Platform, Toast, Alert } from 'ionic-angular';
+import { Component, OnInit }  from '@angular/core';
+import { NgClass } from '@angular/common';
+import { NavParams, NavController, Modal, ActionSheet, Platform, Toast, Alert } from 'ionic-angular';
 
 import { Usuario, TipoAgenda, GlobalMethodService } from '../shared';
 
@@ -10,54 +11,59 @@ import { MapaPage } from '../mapa';
 import { RotaPage } from '../rota';
 import { AgendaDetailPage } from '../agenda-detail';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/agenda/agenda.component.html',
-  pipes: [ AgendaFilterPipe ]
+  pipes: [AgendaFilterPipe],
+  directives: [NgClass]
 })
 export class AgendaPage implements OnInit {
-  
+
   titulo: string = "Agendas";
   agendas: AgendaView[] = [];
   dados: any;
   filtro: string = '';
   mensagenErro: any = null;
-  
+
   constructor(private _navParams: NavParams,
               private _navCtrl: NavController,
-              private _platform: Platform, 
+              private _platform: Platform,
               private _service: AgendaService,
-              public _globalMethod: GlobalMethodService)  {
+              public _globalMethod: GlobalMethodService) {
     this.dados = _navParams.data;
   }
-  
+
   ngOnInit(): void {
     this.getAgendas();
   }
-  
-  onPageDidEnter() {
+
+  ionViewDidEnter() {
   }
-  
+
+  marcarComoFavorito(agenda: AgendaView): void {
+    agenda.favorito = !agenda.favorito;
+  }
+
   carregarPreferencias(): void {
-      this._globalMethod.carregarPagina(PreferenciaPage, this.titulo, true, this._navCtrl);
+    this._globalMethod.carregarPagina(PreferenciaPage, this.titulo, true, this._navCtrl);
   }
-  
-  carregarAgendaDetail(agenda: AgendaView): void {
-      this._globalMethod.carregarPagina(AgendaDetailPage, agenda, true, this._navCtrl);
-  }
-  
+
   carregarMapa(agenda: AgendaView): void {
-      this._navCtrl.push(MapaPage, agenda);
+    this._navCtrl.push(MapaPage, agenda);
   }
-  
+
   carregarRotas(agenda: AgendaView): void {
-      this._globalMethod.carregarPagina(RotaPage, agenda, true, this._navCtrl);
+    this._globalMethod.carregarPagina(RotaPage, agenda, true, this._navCtrl);
   }
-  
+
+  editar(agenda: AgendaView): void {
+    this._globalMethod.carregarPagina(AgendaDetailPage, { titulo: 'Editar', agenda: agenda }, true, this._navCtrl);
+  }
+
   incluir(): void {
-    this.carregarAgendaDetail(null);
+    this._globalMethod.carregarPagina(AgendaDetailPage, { titulo: 'Criar', agenda: null }, true, this._navCtrl);
   }
-  
-  atualizar(refresher) {
+
+  sincronizar(refresher) {
     //-- TODO
     console.log('Begin async operation', refresher);
     setTimeout(() => {
@@ -65,7 +71,7 @@ export class AgendaPage implements OnInit {
       refresher.complete();
     }, 2000);
   }
-  
+
   gerenciar(agenda: AgendaView): void {
     let actionSheet = ActionSheet.create({
       title: 'Opções',
@@ -82,7 +88,7 @@ export class AgendaPage implements OnInit {
           text: 'Editar',
           icon: !this._platform.is('ios') ? 'create' : null,
           handler: () => {
-            this.carregarAgendaDetail(agenda);
+            this.editar(agenda);
           }
         },
         {
@@ -95,7 +101,7 @@ export class AgendaPage implements OnInit {
         },
         {
           text: 'Cancelar',
-          role: 'cancel', 
+          role: 'cancel',
           icon: !this._platform.is('ios') ? 'close' : null,
           handler: () => {
             console.log('Cancelar clicked');
@@ -105,7 +111,7 @@ export class AgendaPage implements OnInit {
     });
     this._navCtrl.present(actionSheet);
   }
-  
+
   excluir(agenda: AgendaView): void {
     let confirm = Alert.create({
       title: 'Excluir',
@@ -128,11 +134,20 @@ export class AgendaPage implements OnInit {
     });
     this._navCtrl.present(confirm);
   }
-  
+
   private getAgendas(): void {
     this._service.getAgendasARealizar()
-                  .subscribe((data: AgendaView[]) => this.agendas = data, 
-                              error =>  this._globalMethod.mostrarErro(this.mensagenErro = <any>error, this._navCtrl) );
+      .subscribe(
+        (data: AgendaView[]) => { //-- on sucess
+          this.agendas = data;
+        },
+        error => { //-- on error
+          this._globalMethod.mostrarErro(this.mensagenErro = <any>error, this._navCtrl);
+        },
+        () => { //-- on completion
+
+        }
+      );
   }
-  
+
 }

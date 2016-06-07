@@ -1,6 +1,6 @@
-import { OnInit }  from '@angular/core';
+import { Component, OnInit }  from '@angular/core';
 
-import { Page, NavParams, NavController, Alert } from 'ionic-angular';
+import { NavParams, NavController, Alert } from 'ionic-angular';
 
 import { GlobalMethodService } from '../shared';
 
@@ -10,7 +10,7 @@ import { AgendaView } from '../agenda';
 import { RotaCreatePage, RotaDetailPage } from '../rota-detail';
 import { MapaPage } from '../mapa';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/rota/rota.component.html'
 })
 export class RotaPage implements OnInit {
@@ -30,6 +30,9 @@ export class RotaPage implements OnInit {
     this.getRotas();
   }
   
+  ionViewDidEnter() {
+  }
+
   incluir(): void {
     this._navCtrl.push(RotaCreatePage, this.agenda);
   }

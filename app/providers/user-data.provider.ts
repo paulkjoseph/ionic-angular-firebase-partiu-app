@@ -4,12 +4,12 @@ import { Storage, LocalStorage, Events } from 'ionic-angular';
 
 @Injectable()
 export class UserDataProvider {
-  
+
   _favorites = [];
   HAS_LOGGED_IN = 'hasLoggedIn';
   storage = new Storage(LocalStorage);
 
-  constructor(private _events: Events) {}
+  constructor(private _events: Events) { }
 
   hasFavorite(favorite) {
     return (this._favorites.indexOf(favorite) > -1);

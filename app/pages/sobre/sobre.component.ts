@@ -1,8 +1,8 @@
-import { OnInit }  from '@angular/core';
+import { Component, OnInit }  from '@angular/core';
 
-import { IonicApp, Page, NavParams, ViewController } from 'ionic-angular';
+import { App, NavParams, ViewController } from 'ionic-angular';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/sobre/sobre.component.html',
 })
 export class SobrePage implements OnInit {
@@ -11,7 +11,7 @@ export class SobrePage implements OnInit {
   
   private mensagenErro: any;
   
-  constructor(private _app: IonicApp, 
+  constructor(private _app: App, 
               private _navParams: NavParams, 
               private _viewCtrl: ViewController) {
   }
@@ -19,10 +19,10 @@ export class SobrePage implements OnInit {
   ngOnInit(): void {
   }
   
-  onPageDidEnter() {
+  ionViewDidEnter() {
     this._app.setTitle(this.titulo);
   }
-  
+
   dismiss() {
       this._viewCtrl.dismiss(this.titulo);
   }

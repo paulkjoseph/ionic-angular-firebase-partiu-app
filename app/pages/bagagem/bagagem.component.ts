@@ -1,10 +1,10 @@
-import { OnInit }  from '@angular/core';
+import { Component, OnInit }  from '@angular/core';
 
-import { IonicApp, Page, NavParams, ViewController, Alert, NavController, ActionSheet, Platform } from 'ionic-angular';
+import { App, NavParams, ViewController, Alert, NavController, ActionSheet, Platform } from 'ionic-angular';
 
 import { Item } from '../shared';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/bagagem/bagagem.component.html',
 })
 export class BagagemPage implements OnInit {
@@ -16,7 +16,7 @@ export class BagagemPage implements OnInit {
   
   private mensagenErro: any;
   
-  constructor(private _app: IonicApp, 
+  constructor(private _app: App, 
               private _navParams: NavParams, 
               private _viewCtrl: ViewController,
               private _navCtrl: NavController,
@@ -28,7 +28,7 @@ export class BagagemPage implements OnInit {
     this.getBagagem();
   }
   
-  onPageDidEnter() {
+  ionViewDidEnter() {
     this._app.setTitle(this.titulo);
     this.gerenciarContador();
   }

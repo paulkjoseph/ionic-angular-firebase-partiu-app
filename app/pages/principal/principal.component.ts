@@ -1,12 +1,13 @@
-import { OnInit }  from '@angular/core';
-import { Page, NavParams } from 'ionic-angular';
+import { Component, OnInit }  from '@angular/core';
+
+import { NavParams } from 'ionic-angular';
 
 import { AgendaPage } from '../agenda';
 import { MapaPage } from '../mapa';
 import { HistoricoPage } from '../historico';
 import { NotificacaoPage } from '../notificacao';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/principal/principal.component.html'
 })
 export class PrincipalPage implements OnInit {
