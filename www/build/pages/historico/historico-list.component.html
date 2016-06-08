@@ -1,5 +1,5 @@
 <ion-navbar *navbar class="hide-border">
-  <ion-segment [(ngModel)]="segment" (change)="atualizarLista()">
+  <ion-segment [(ngModel)]="segment" (ionChange)="atualizarLista()">
     <ion-segment-button value="todas">
       Todas
     </ion-segment-button>
@@ -21,7 +21,7 @@
 
 <ion-content class="historico-list cards-bg">
 
-  <ion-refresher (refresh)="atualizar($event)">
+  <ion-refresher (ionRefresh)="atualizar($event)">
     <ion-refresher-content pullingText="Puxe para atualizar" refreshingText="Carregando...">
     </ion-refresher-content>
   </ion-refresher>

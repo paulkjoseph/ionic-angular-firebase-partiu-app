@@ -8,7 +8,7 @@
 </ion-navbar>
 
 <ion-content class="preferencia">
-  
+
   <ion-list>
     <ion-item-divider light>Escolhe prefêrencias de pontos de interesse</ion-item-divider>
     <ion-item *ngFor="let preferencia of preferencias">
@@ -16,5 +16,5 @@
       <ion-checkbox [(ngModel)]="preferencia.preferido" [checked]="preferencia.preferido" [value]="preferencia.descricao"></ion-checkbox>
     </ion-item>
   </ion-list>
-  
+
 </ion-content>

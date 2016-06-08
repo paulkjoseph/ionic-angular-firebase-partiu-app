@@ -9,34 +9,31 @@ import { MapaPage } from '../mapa';
   templateUrl: 'build/pages/rota-detail/rota-detail.component.html'
 })
 export class RotaDetailPage implements OnInit {
-  
+
   titulo: string = "Detalhes";
   rota: RotaView;
-  
+
   private mensagenErro: any;
-  
+
   constructor(private _navParams: NavParams,
-              private _viewCtrl: ViewController,
-              private _navCtrl: NavController)  {
+    private _viewCtrl: ViewController,
+    private _navCtrl: NavController) {
   }
-  
+
   ngOnInit(): void {
     this.rota = this._navParams.data;
-  }
-  
-  ionViewDidEnter() {
   }
 
   salvar(): void {
     this.dismiss();
   }
-  
+
   carregarMapa(): void {
-      this._navCtrl.push(MapaPage, this.rota);
+    this._navCtrl.push(MapaPage, this.rota);
   }
-  
+
   private dismiss() {
-      this._viewCtrl.dismiss();
+    this._viewCtrl.dismiss();
   }
-  
+
 }

@@ -8,35 +8,35 @@ import { Item } from '../shared';
   templateUrl: 'build/pages/bagagem/bagagem.component.html',
 })
 export class BagagemPage implements OnInit {
-  
+
   titulo: string = "Bagagem";
   dados: any;
   bagagem: Item[] = [];
   contador: number = 0;
-  
+
   private mensagenErro: any;
-  
-  constructor(private _app: App, 
-              private _navParams: NavParams, 
-              private _viewCtrl: ViewController,
-              private _navCtrl: NavController,
-              private _platform: Platform) {
+
+  constructor(private _app: App,
+    private _navParams: NavParams,
+    private _viewCtrl: ViewController,
+    private _navCtrl: NavController,
+    private _platform: Platform) {
   }
-   
+
   ngOnInit(): void {
     this.dados = this._navParams.data;
     this.getBagagem();
   }
-  
+
   ionViewDidEnter() {
     this._app.setTitle(this.titulo);
     this.gerenciarContador();
   }
-  
+
   salvar(): void {
     this.dismiss();
   }
-  
+
   incluir(): void {
     let prompt = Alert.create({
       title: 'Bagagem',
@@ -65,11 +65,11 @@ export class BagagemPage implements OnInit {
     });
     this._navCtrl.present(prompt);
   }
-  
+
   gerenciarContador(): void {
     this.contador = this.bagagem.filter((item: Item) => item.status === true).length;
   }
-  
+
   gerenciar(item: Item): void {
     let actionSheet = ActionSheet.create({
       title: 'Opções',
@@ -91,7 +91,7 @@ export class BagagemPage implements OnInit {
         },
         {
           text: 'Cancelar',
-          role: 'cancel', 
+          role: 'cancel',
           icon: !this._platform.is('ios') ? 'close' : null,
           handler: () => {
             console.log('Cancelar clicked');
@@ -101,11 +101,11 @@ export class BagagemPage implements OnInit {
     });
     this._navCtrl.present(actionSheet);
   }
-  
+
   private dismiss() {
-      this._viewCtrl.dismiss(this.titulo);
+    this._viewCtrl.dismiss(this.titulo);
   }
-  
+
   private getBagagem(): void {
     this.bagagem.push(new Item("RG", false));
     this.bagagem.push(new Item("CPF", false));
@@ -121,5 +121,5 @@ export class BagagemPage implements OnInit {
     this.bagagem.push(new Item("Perfume", false));
     this.bagagem.push(new Item("Plugues adaptadores", false));
   }
-  
+
 }

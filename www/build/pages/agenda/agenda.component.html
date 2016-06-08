@@ -17,7 +17,7 @@
 
 <ion-content class="agenda cards-bg">
 
-  <ion-refresher (refresh)="sincronizar($event)">
+  <ion-refresher (ionRefresh)="sincronizar($event)">
     <ion-refresher-content pullingText="Puxe para sincronizar" refreshingText="Carregando...">
     </ion-refresher-content>
   </ion-refresher>

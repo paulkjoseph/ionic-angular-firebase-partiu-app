@@ -11,7 +11,7 @@ export class FirebaseDataProvider {
     public tiposPontoInteresse: any;
     public tiposTransporte: any;
     public usuarios: any;
-    
+
     constructor() {
         // this.tiposAgenda = firebase.database().ref('/tiposAgenda/');
         // this.tiposDado = firebase.database().ref('/tiposDado/');
@@ -19,7 +19,7 @@ export class FirebaseDataProvider {
         // this.tiposTransporte = firebase.database().ref('/tiposTransporte/');
         // this.usuarios = firebase.database().ref('/usuarios/');
     }
-    
+
     setUsuario(usuario: Usuario) {
         // firebase.database().ref('/usuarios/' + usuario.id).set({
         //   nome: usuario.nome,

@@ -21,18 +21,15 @@ export class HistoricoPage implements OnInit {
   mensagenErro: any;
 
   constructor(private _navParams: NavParams,
-              private _navCtrl: NavController,
-              private _platform: Platform,
-              private _service: HistoricoService,
-              public _globalMethod: GlobalMethodService) {
+    private _navCtrl: NavController,
+    private _platform: Platform,
+    private _service: HistoricoService,
+    public _globalMethod: GlobalMethodService) {
     this.dados = this._navParams.data;
   }
 
   ngOnInit(): void {
     this.getHistoricos();
-  }
-
-  ionViewDidEnter() {
   }
 
   carregarAgendas(historico: Historico): void {
@@ -109,15 +106,15 @@ export class HistoricoPage implements OnInit {
   private getHistoricos(): void {
     this._service.getHistoricos()
       .subscribe(
-        (data: Historico[]) => { //-- on sucess
-          this.historicos = data;
-        },
-        error => { //-- on error
-          this._globalMethod.mostrarErro(this.mensagenErro = <any>error, this._navCtrl);
-        },
-        () => { //-- on completion
-          this.rows = Array.from(Array(Math.ceil((this.historicos).length / 2)).keys());
-        }
+      (data: Historico[]) => { //-- on sucess
+        this.historicos = data;
+      },
+      error => { //-- on error
+        this._globalMethod.mostrarErro(this.mensagenErro = <any>error, this._navCtrl);
+      },
+      () => { //-- on completion
+        this.rows = Array.from(Array(Math.ceil((this.historicos).length / 2)).keys());
+      }
       );
   }
 

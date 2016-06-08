@@ -8,21 +8,21 @@ import { NOTIFICACAO_URL} from '../shared';
 
 @Injectable()
 export class NotificacaoService {
-    
+
     constructor(private _http: Http) { }
 
     getNotificacoes(): Observable<Notificacao[]> {
         let data = this._http.get(NOTIFICACAO_URL);
         return data.map((response: Response) => <Notificacao[]>response.json())
-                    // .do(data => console.log('getNotificacoes: ' +  JSON.stringify(data)))
-                    .catch(this.handleError);
+            // .do(data => console.log('getNotificacoes: ' +  JSON.stringify(data)))
+            .catch(this.handleError);
     }
 
     getNotificacao(id: number): Observable<Notificacao> {
         return this.getNotificacoes()
-                    .map((lista: Notificacao[]) => lista.find(obj => obj.id === id))
-                    // .do(data => console.log('getNotificacao: ' +  JSON.stringify(data)))
-                    .catch(this.handleError);;
+            .map((lista: Notificacao[]) => lista.find(obj => obj.id === id))
+            // .do(data => console.log('getNotificacao: ' +  JSON.stringify(data)))
+            .catch(this.handleError);;
     }
 
     private handleError(error: Response) {

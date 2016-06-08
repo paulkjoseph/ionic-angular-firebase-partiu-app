@@ -14,38 +14,35 @@ import { DesenvolvimentoPage } from '../desenvolvimento';
   pipes: [ NotificacaoFilterPipe ]
 })
 export class NotificacaoPage implements OnInit {
-  
+
   titulo: string = "Notificações";
   notificacoes: Notificacao[] = [];
   dados: any;
   filtro: string = '';
   mensagenErro: any;
-  
+
   constructor(private _navParams: NavParams,
-              private _navCtrl: NavController,
-              private _service: NotificacaoService,
-              private _globalMethod: GlobalMethodService)  {
+    private _navCtrl: NavController,
+    private _service: NotificacaoService,
+    private _globalMethod: GlobalMethodService) {
     this.dados = this._navParams.data;
   }
-  
+
   ngOnInit(): void {
     this.getNotificacoes();
   }
-  
-  ionViewDidEnter() {
-  }
 
   carregarPreferencias(): void {
-      this._globalMethod.carregarPagina(PreferenciaPage, this.titulo, true, this._navCtrl);
+    this._globalMethod.carregarPagina(PreferenciaPage, this.titulo, true, this._navCtrl);
   }
-  
+
   marcarComoLida(): void {
   }
-  
+
   visualizar(notificacao: Notificacao): void {
-      this._globalMethod.carregarPagina(DesenvolvimentoPage, {title: "Detalhes da Notificação"}, true, this._navCtrl);
+    this._globalMethod.carregarPagina(DesenvolvimentoPage, { title: "Detalhes da Notificação" }, true, this._navCtrl);
   }
-  
+
   atualizar(refresher) {
     console.log('Begin async operation', refresher);
     setTimeout(() => {
@@ -53,7 +50,7 @@ export class NotificacaoPage implements OnInit {
       refresher.complete();
     }, 2000);
   }
-  
+
   excluir(notificacao: Notificacao): void {
     let confirm = Alert.create({
       title: 'Excluir',
@@ -75,11 +72,20 @@ export class NotificacaoPage implements OnInit {
     });
     this._navCtrl.present(confirm);
   }
-  
+
   private getNotificacoes(): void {
     this._service.getNotificacoes()
-                  .subscribe((data: Notificacao[]) => this.notificacoes = data, 
-                              error =>  this._globalMethod.mostrarErro(this.mensagenErro = <any>error, this._navCtrl) );
+      .subscribe(
+        (data: Notificacao[]) => { //-- on sucess
+          this.notificacoes = data;
+        },
+        error => { //-- on error
+          this._globalMethod.mostrarErro(this.mensagenErro = <any>error, this._navCtrl);
+        },
+        () => { //-- on completion
+
+        }
+      );
   }
-  
+
 }

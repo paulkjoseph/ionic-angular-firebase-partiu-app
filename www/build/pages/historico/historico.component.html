@@ -17,7 +17,7 @@
 
 <ion-content class="historico cards-bg">
 
-  <ion-refresher (refresh)="sincronizar($event)">
+  <ion-refresher (ionRefresh)="sincronizar($event)">
     <ion-refresher-content pullingText="Puxe para atualizar" refreshingText="Carregando...">
     </ion-refresher-content>
   </ion-refresher>

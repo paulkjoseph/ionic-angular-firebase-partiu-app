@@ -11,9 +11,9 @@ import { NotificacaoPage } from '../notificacao';
   templateUrl: 'build/pages/principal/principal.component.html'
 })
 export class PrincipalPage implements OnInit {
-  
+
   selectedIndex: number;
-  
+
   tab1Root: any = AgendaPage;
   tab2Root: any = MapaPage;
   tab3Root: any = HistoricoPage;
@@ -21,9 +21,9 @@ export class PrincipalPage implements OnInit {
 
   constructor(private _navParams: NavParams) {
   }
-  
+
   ngOnInit(): void {
     this.selectedIndex = this._navParams.data.tabIndex || 0;
   }
-  
+
 }

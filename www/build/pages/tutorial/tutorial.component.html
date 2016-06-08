@@ -10,7 +10,7 @@
 </ion-navbar>
 
 <ion-content class="tutorial">
-  
+
   <ion-slides pager>
     <ion-slide *ngFor="let tutorial of tutorials">
       <img [src]="tutorial.url" class="slide-image" padding/>
@@ -18,5 +18,5 @@
       <p [innerHTML]="tutorial.descricao"></p>
     </ion-slide>
   </ion-slides>
-  
+
 </ion-content>

@@ -1,15 +1,14 @@
-
 <ion-navbar *navbar>
-  <ion-title>{{titulo}}</ion-title>
-  <ion-buttons end>
-    <button (click)="salvar()">
+    <ion-title>{{titulo}}</ion-title>
+    <ion-buttons end>
+        <button (click)="salvar()">
         Salvar
     </button>
-  </ion-buttons>
+    </ion-buttons>
 </ion-navbar>
 
 <ion-content class="cards-bg rota-create">
-    
+
     <ion-card class="adv-map">
         <div style="position: relative">
             <img src="img/advance-card-map-paris.png">
@@ -19,19 +18,19 @@
         </div>
         <ion-list>
             <ion-item-divider light>Informações da Rota</ion-item-divider>
-            <ion-item >
+            <ion-item>
                 <ion-label stacked dark style="font-size: 0.875em;">Saída</ion-label>
                 <ion-textarea type="text" placeholder="Ex. RIbeirão Preto"></ion-textarea>
             </ion-item>
-            <ion-item >
+            <ion-item>
                 <ion-label dark style="font-size: 0.875em;">Data</ion-label>
                 <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MMM YYYY" cancelText="Cancelar" doneText="OK"></ion-datetime>
             </ion-item>
-            <ion-item >
+            <ion-item>
                 <ion-label stacked dark style="font-size: 0.875em;">Chegada</ion-label>
                 <ion-textarea type="text" placeholder="Ex. São Carlos"></ion-textarea>
             </ion-item>
-            <ion-item >
+            <ion-item>
                 <ion-label dark style="font-size: 0.875em;">Data</ion-label>
                 <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MMM YYYY" cancelText="Cancelar" doneText="OK"></ion-datetime>
             </ion-item>
@@ -71,5 +70,5 @@
             </ion-item>
         </ion-list>
     </ion-card>
-    
+
 </ion-content>

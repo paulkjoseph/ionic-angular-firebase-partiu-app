@@ -17,7 +17,7 @@ import { RotaPage } from '../rota';
   directives: [ NgClass ]
 })
 export class HistoricoListPage implements OnInit {
-  
+
   titulo: string = "Históricos";
   todasAgendas: AgendaView[] = [];
   agendas: AgendaView[] = [];
@@ -25,51 +25,49 @@ export class HistoricoListPage implements OnInit {
   filtro: string = '';
   segment: string = 'todas';
   mensagenErro: any;
-  
+
   constructor(private _navParams: NavParams,
-              private _navCtrl: NavController,
-              private _platform: Platform,
-              private _service: AgendaService,
-              public _globalMethod: GlobalMethodService) {
+    private _navCtrl: NavController,
+    private _platform: Platform,
+    private _service: AgendaService,
+    public _globalMethod: GlobalMethodService) {
     this.dados = this._navParams.data;
   }
-  
+
   ngOnInit(): void {
     this.getAgendas();
   }
-  
-  ionViewDidEnter() {
-  }
 
   atualizarLista(): void {
+      console.log('atualizarLista: ' +  JSON.stringify(this.segment ))
     if (this.segment === 'favoritas') {
-        this.agendas = this.todasAgendas.filter((data: AgendaView) => (new Date(data.dataFim) < new Date()) && data.favorito );
+      this.agendas = this.todasAgendas.filter((data: AgendaView) => (new Date(data.dataFim) < new Date()) && data.favorito);
     } else {
-        this.agendas = this.todasAgendas.filter((data: AgendaView) => new Date(data.dataFim) < new Date());
+      this.agendas = this.todasAgendas.filter((data: AgendaView) => new Date(data.dataFim) < new Date());
     }
   }
-  
+
   marcarComoFavorito(agenda: AgendaView): void {
     agenda.favorito = !agenda.favorito;
     this.atualizarLista();
   }
-  
+
   carregarPreferencias(): void {
-      this._globalMethod.carregarPagina(PreferenciaPage, this.titulo, true, this._navCtrl);
+    this._globalMethod.carregarPagina(PreferenciaPage, this.titulo, true, this._navCtrl);
   }
-  
+
   carregarMapa(agenda: AgendaView): void {
-      this._navCtrl.push(MapaPage, agenda);
+    this._navCtrl.push(MapaPage, agenda);
   }
-  
+
   carregarRotas(agenda: AgendaView): void {
-      this._globalMethod.carregarPagina(RotaPage, agenda, true, this._navCtrl);
+    this._globalMethod.carregarPagina(RotaPage, agenda, true, this._navCtrl);
   }
-  
+
   reagendar(agenda: AgendaView): void {
-      this._globalMethod.carregarPagina(AgendaDetailPage, {titulo: 'Reagendar', agenda: agenda}, true, this._navCtrl);
+    this._globalMethod.carregarPagina(AgendaDetailPage, { titulo: 'Reagendar', agenda: agenda }, true, this._navCtrl);
   }
-  
+
   atualizar(refresher) {
     //-- TODO
     console.log('Begin async operation', refresher);
@@ -78,7 +76,7 @@ export class HistoricoListPage implements OnInit {
       refresher.complete();
     }, 2000);
   }
-  
+
   gerenciar(agenda: AgendaView): void {
     let actionSheet = ActionSheet.create({
       title: 'Opções',
@@ -108,7 +106,7 @@ export class HistoricoListPage implements OnInit {
         },
         {
           text: 'Cancelar',
-          role: 'cancel', 
+          role: 'cancel',
           icon: !this._platform.is('ios') ? 'close' : null,
           handler: () => {
             console.log('Cancelar clicked');
@@ -118,7 +116,7 @@ export class HistoricoListPage implements OnInit {
     });
     this._navCtrl.present(actionSheet);
   }
-  
+
   excluir(agenda: AgendaView): void {
     let confirm = Alert.create({
       title: 'Excluir',
@@ -141,20 +139,20 @@ export class HistoricoListPage implements OnInit {
     });
     this._navCtrl.present(confirm);
   }
-  
+
   private getAgendas(): void {
     this._service.getAgendasRealidas()
       .subscribe(
-        (data: AgendaView[]) => { //-- on sucess
-          this.todasAgendas = data;
-        },
-        error => { //-- on error
-          this._globalMethod.mostrarErro(this.mensagenErro = <any>error, this._navCtrl);
-        },
-        () => { //-- on completion
-          this.agendas = this.todasAgendas.filter((data: AgendaView) => new Date(data.dataFim) < new Date());
-        }
+      (data: AgendaView[]) => { //-- on sucess
+        this.todasAgendas = data;
+      },
+      error => { //-- on error
+        this._globalMethod.mostrarErro(this.mensagenErro = <any>error, this._navCtrl);
+      },
+      () => { //-- on completion
+        this.agendas = this.todasAgendas.filter((data: AgendaView) => new Date(data.dataFim) < new Date());
+      }
       );
   }
-  
+
 }

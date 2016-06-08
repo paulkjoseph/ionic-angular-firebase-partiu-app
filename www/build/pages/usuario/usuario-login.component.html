@@ -1,9 +1,9 @@
 <ion-content padding class="usuario-login bg">
-    
+
   <div class="logo">
     <img src="img/logo.png">
   </div>
-  
+
   <ion-grid>
     <form [ngFormModel]="loginForm">
       <span *ngIf="formError.email" danger padding-left>
@@ -12,27 +12,21 @@
       <span *ngIf="formError.senha" danger padding-left>
         {{formError.senha}}
       </span>
-      <ion-row >
+      <ion-row>
         <ion-col width-100>
           <ion-item>
             <ion-icon name="person" item-left></ion-icon>
-            <ion-input [(ngModel)]="usuario.email" 
-                        ngControl="email" 
-                        type="email" 
-                        placeholder="E-mail">
+            <ion-input [(ngModel)]="usuario.email" ngControl="email" type="email" placeholder="E-mail">
             </ion-input>
           </ion-item>
           <ion-item no-lines>
             <ion-icon name="lock" item-left></ion-icon>
-            <ion-input [(ngModel)]="usuario.senha" 
-                        ngControl="senha" 
-                        type="password" 
-                        placeholder="Senha">
+            <ion-input [(ngModel)]="usuario.senha" ngControl="senha" type="password" placeholder="Senha">
             </ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
-        
+
       <ion-row>
         <ion-col width-50>
           <button mdc-grey-800 (click)="criarConta()" type="submit">Criar</button>
@@ -42,13 +36,19 @@
         </ion-col>
       </ion-row>
     </form>
-    
+
     <ion-row>
-      <ion-col width-40><hr style="border-top: 1px solid white;"></ion-col>
-      <ion-col width-20><p light style="text-align:center;"><strong>OU</strong></p></ion-col>
-      <ion-col width-40><hr style="border-top: 1px solid white;"></ion-col>
+      <ion-col width-40>
+        <hr style="border-top: 1px solid white;">
+      </ion-col>
+      <ion-col width-20>
+        <p light style="text-align:center;"><strong>OU</strong></p>
+      </ion-col>
+      <ion-col width-40>
+        <hr style="border-top: 1px solid white;">
+      </ion-col>
     </ion-row>
-    
+
     <ion-row>
       <ion-col width-25>
         <button twitter (click)="loginTwitter()">
@@ -72,7 +72,7 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  
+
 </ion-content>
 
 <button fab light fab-bottom fab-center style="z-index: 100" (click)="pular()">

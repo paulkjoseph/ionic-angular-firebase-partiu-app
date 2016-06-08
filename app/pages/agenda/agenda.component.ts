@@ -2,9 +2,13 @@ import { Component, OnInit }  from '@angular/core';
 import { NgClass } from '@angular/common';
 import { NavParams, NavController, Modal, ActionSheet, Platform, Toast, Alert } from 'ionic-angular';
 
+import { UserDataProvider } from '../../providers/user-data.provider';
+
 import { Usuario, TipoAgenda, GlobalMethodService } from '../shared';
 
 import { AgendaView, AgendaService, AgendaFilterPipe } from './';
+
+import { UsuarioView } from '../usuario';
 
 import { PreferenciaPage } from '../preferencia';
 import { MapaPage } from '../mapa';
@@ -14,11 +18,13 @@ import { AgendaDetailPage } from '../agenda-detail';
 @Component({
   templateUrl: 'build/pages/agenda/agenda.component.html',
   pipes: [AgendaFilterPipe],
-  directives: [NgClass]
+  directives: [NgClass],
+  providers: [ UserDataProvider ]
 })
 export class AgendaPage implements OnInit {
 
   titulo: string = "Agendas";
+  usuario: UsuarioView;
   agendas: AgendaView[] = [];
   dados: any;
   filtro: string = '';
@@ -27,16 +33,15 @@ export class AgendaPage implements OnInit {
   constructor(private _navParams: NavParams,
               private _navCtrl: NavController,
               private _platform: Platform,
+              private _userData: UserDataProvider,
               private _service: AgendaService,
               public _globalMethod: GlobalMethodService) {
     this.dados = _navParams.data;
   }
 
   ngOnInit(): void {
+    this.getUsuario();
     this.getAgendas();
-  }
-
-  ionViewDidEnter() {
   }
 
   marcarComoFavorito(agenda: AgendaView): void {
@@ -56,11 +61,11 @@ export class AgendaPage implements OnInit {
   }
 
   editar(agenda: AgendaView): void {
-    this._globalMethod.carregarPagina(AgendaDetailPage, { titulo: 'Editar', agenda: agenda }, true, this._navCtrl);
+    this._globalMethod.carregarPagina(AgendaDetailPage, { titulo: 'Editar', agenda: agenda, usuario: this.usuario }, true, this._navCtrl);
   }
 
   incluir(): void {
-    this._globalMethod.carregarPagina(AgendaDetailPage, { titulo: 'Criar', agenda: null }, true, this._navCtrl);
+    this._globalMethod.carregarPagina(AgendaDetailPage, { titulo: 'Criar', agenda: null, usuario: this.usuario }, true, this._navCtrl);
   }
 
   sincronizar(refresher) {
@@ -133,6 +138,12 @@ export class AgendaPage implements OnInit {
       ]
     });
     this._navCtrl.present(confirm);
+  }
+
+  private getUsuario() {
+    this._userData.getUsuario().then(
+      (data: UsuarioView) => this.usuario = data,
+      error => this._globalMethod.mostrarErro(this.mensagenErro = <any>error, this._navCtrl));
   }
 
   private getAgendas(): void {

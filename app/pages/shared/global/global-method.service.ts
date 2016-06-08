@@ -23,7 +23,7 @@ export class GlobalMethodService {
             navCtrl.present(modal);
             modal.onDismiss(data => {
                 if (data) {
-                    console.log('onPageDismiss: ' + JSON.stringify(data));
+                    console.log('onDismiss: ' + JSON.stringify(data));
                 }
             });
         }

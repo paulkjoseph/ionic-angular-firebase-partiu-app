@@ -11,23 +11,18 @@
 </ion-navbar>
 
 <ion-toolbar>
-  <ion-searchbar primary
-                 [(ngModel)]="filtro"
-                 placeholder="Pesquisa">
+  <ion-searchbar primary [(ngModel)]="filtro" placeholder="Pesquisa">
   </ion-searchbar>
 </ion-toolbar>
 
 <ion-content class="notificacao cards-bg social-cards">
-  
-  <ion-refresher (refresh)="atualizar($event)">
-    <ion-refresher-content
-      pullingText="Puxe para atualizar"
-      refreshingText="Carregando...">
+
+  <ion-refresher (ionRefresh)="atualizar($event)">
+    <ion-refresher-content pullingText="Puxe para atualizar" refreshingText="Carregando...">
     </ion-refresher-content>
   </ion-refresher>
-  
-  <ion-card *ngFor="let notificacao of notificacoes | notificacaoFilter:filtro" 
-            #card [attr.category]="notificacao.categoria | lowercase" >
+
+  <ion-card *ngFor="let notificacao of notificacoes | notificacaoFilter:filtro" #card [attr.category]="notificacao.categoria | lowercase">
     <ion-item>
       <ion-avatar item-left>
         <img src="http://placehold.it/80?text=Logo">
@@ -59,5 +54,5 @@
       </button>
     </ion-item>
   </ion-card>
-  
+
 </ion-content>
