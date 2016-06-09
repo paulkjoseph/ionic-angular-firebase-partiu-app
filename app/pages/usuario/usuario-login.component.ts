@@ -1,4 +1,4 @@
-import { Component, OnInit }  from '@angular/core';
+import { Component }  from '@angular/core';
 import { FormBuilder, ControlGroup, Control, Validators } from '@angular/common';
 
 import { NavController, MenuController, NavParams, ViewController, Modal, Events, Loading } from 'ionic-angular';
@@ -19,7 +19,7 @@ import { PreferenciaPage } from '../preferencia';
   templateUrl: 'build/pages/usuario/usuario-login.component.html',
   providers: [UserDataProvider, FirebaseDataProvider]
 })
-export class UsuarioLoginPage implements OnInit {
+export class UsuarioLoginPage {
 
   titulo: string = "Login";
   usuario: UsuarioView;
@@ -43,22 +43,30 @@ export class UsuarioLoginPage implements OnInit {
     private _globalMethod: GlobalMethodService,
     private _firebaseData: FirebaseDataProvider) {
     this.dados = _navParams.data;
+    this.usuario = new UsuarioView("", "");
   }
 
-  ngOnInit(): void {
-    this.usuario = new UsuarioView("", "");
+  ionViewLoaded() {
     this.gerenciarFormulario();
   }
+
+  ionViewWillEnter() { }
 
   ionViewDidEnter() {
     this._menu.enable(false);
     this._events.publish('usuario:initApp');
   }
 
-  ionVieweDidLeave() {
+  ionViewWillLeave() { }
+
+  ionViewDidLeave() {
     this._menu.enable(true);
     this.dismiss();
   }
+
+  ionViewWillUnload() { }
+
+  ionViewDidUnload() { }
 
   login() {
     if (this.loginForm.dirty && this.loginForm.valid) {

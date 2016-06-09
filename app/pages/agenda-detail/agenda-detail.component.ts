@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject }  from '@angular/core';
+import { Component, Inject }  from '@angular/core';
 
 import { NavParams, NavController, Modal, Toast } from 'ionic-angular';
 
@@ -13,7 +13,7 @@ import { RotaPage } from '../rota';
 @Component({
   templateUrl: 'build/pages/agenda-detail/agenda-detail.component.html'
 })
-export class AgendaDetailPage implements OnInit {
+export class AgendaDetailPage {
 
   titulo: string = "Agenda";
   usuario: UsuarioView;
@@ -31,9 +31,21 @@ export class AgendaDetailPage implements OnInit {
     this.usuario = _navParams.data.usuario;
   }
 
-  ngOnInit(): void {
+  ionViewLoaded() {
     this.getTiposDeAgenda();
   }
+
+  ionViewWillEnter() { }
+
+  ionViewDidEnter() { }
+
+  ionViewWillLeave() { }
+
+  ionViewDidLeave() { }
+
+  ionViewWillUnload() { }
+
+  ionViewDidUnload() { }
 
   confirmar(): void {
     this._globalMethod.carregarPagina(RotaPage, this.agenda, true, this._navCtrl);

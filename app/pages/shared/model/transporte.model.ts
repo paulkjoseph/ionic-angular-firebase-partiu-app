@@ -9,9 +9,9 @@
 export class Transporte {
     id: number;
     constructor(public tipoTransporte: TipoTransporte,
-                public descricao: string = "") {
-                    
-                }
+        public descricao: string = "") {
+
+    }
 }
 
 /**
@@ -24,6 +24,6 @@ export class Transporte {
 export class TipoTransporte {
     id: number;
     constructor(public descricao: string = "") {
-                    
-                }
+
+    }
 }

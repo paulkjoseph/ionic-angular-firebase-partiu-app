@@ -1,29 +1,35 @@
-import { Component, OnInit }  from '@angular/core';
+import { Component }  from '@angular/core';
 
-import { App, NavParams, ViewController } from 'ionic-angular';
+import { NavParams, ViewController } from 'ionic-angular';
 
 @Component({
   templateUrl: 'build/pages/compartilhar/compartilhar.component.html',
 })
-export class CompartilharPage implements OnInit {
+export class CompartilharPage {
 
   titulo: string = "Compartilhar";
   dados: any;
 
   private mensagenErro: any;
 
-  constructor(private _app: App,
-    private _navParams: NavParams,
+  constructor(private _navParams: NavParams,
     private _viewCtrl: ViewController) {
+    this.dados = _navParams.data;
   }
 
-  ngOnInit(): void {
-    this.dados = this._navParams.data;
-  }
+  ionViewLoaded() { }
 
-  ionViewDidEnter() {
-    this._app.setTitle(this.titulo);
-  }
+  ionViewWillEnter() { }
+
+  ionViewDidEnter() { }
+
+  ionViewWillLeave() { }
+
+  ionViewDidLeave() { }
+
+  ionViewWillUnload() { }
+
+  ionViewDidUnload() { }
 
   dismiss() {
     this._viewCtrl.dismiss(this.titulo);

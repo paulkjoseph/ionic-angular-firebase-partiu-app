@@ -1,4 +1,4 @@
-import { Component, OnInit }  from '@angular/core';
+import { Component }  from '@angular/core';
 
 import { NavParams, NavController, Modal, Alert } from 'ionic-angular';
 
@@ -11,9 +11,9 @@ import { DesenvolvimentoPage } from '../desenvolvimento';
 
 @Component({
   templateUrl: 'build/pages/notificacao/notificacao.component.html',
-  pipes: [ NotificacaoFilterPipe ]
+  pipes: [NotificacaoFilterPipe]
 })
-export class NotificacaoPage implements OnInit {
+export class NotificacaoPage {
 
   titulo: string = "Notificações";
   notificacoes: Notificacao[] = [];
@@ -28,9 +28,21 @@ export class NotificacaoPage implements OnInit {
     this.dados = this._navParams.data;
   }
 
-  ngOnInit(): void {
+  ionViewLoaded() {
     this.getNotificacoes();
   }
+
+  ionViewWillEnter() { }
+
+  ionViewDidEnter() { }
+
+  ionViewWillLeave() { }
+
+  ionViewDidLeave() { }
+
+  ionViewWillUnload() { }
+
+  ionViewDidUnload() { }
 
   carregarPreferencias(): void {
     this._globalMethod.carregarPagina(PreferenciaPage, this.titulo, true, this._navCtrl);
@@ -76,15 +88,15 @@ export class NotificacaoPage implements OnInit {
   private getNotificacoes(): void {
     this._service.getNotificacoes()
       .subscribe(
-        (data: Notificacao[]) => { //-- on sucess
-          this.notificacoes = data;
-        },
-        error => { //-- on error
-          this._globalMethod.mostrarErro(this.mensagenErro = <any>error, this._navCtrl);
-        },
-        () => { //-- on completion
+      (data: Notificacao[]) => { //-- on sucess
+        this.notificacoes = data;
+      },
+      error => { //-- on error
+        this._globalMethod.mostrarErro(this.mensagenErro = <any>error, this._navCtrl);
+      },
+      () => { //-- on completion
 
-        }
+      }
       );
   }
 

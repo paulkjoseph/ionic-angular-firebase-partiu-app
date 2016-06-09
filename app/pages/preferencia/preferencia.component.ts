@@ -1,4 +1,4 @@
-import { Component, OnInit }  from '@angular/core';
+import { Component }  from '@angular/core';
 
 import { App, NavParams, ViewController, NavController, Platform } from 'ionic-angular';
 
@@ -9,7 +9,7 @@ import { Preferencia, PreferenciaService } from './';
 @Component({
   templateUrl: 'build/pages/preferencia/preferencia.component.html'
 })
-export class PreferenciaPage implements OnInit {
+export class PreferenciaPage {
 
   titulo: string = "Prefêrencias";
   isAndroid: boolean = false;
@@ -18,8 +18,7 @@ export class PreferenciaPage implements OnInit {
   preferencias: Array<Preferencia> = [];
   mensagenErro: any;
 
-  constructor(private _app: App,
-    private _navParams: NavParams,
+  constructor(private _navParams: NavParams,
     private _viewCtrl: ViewController,
     private _navCtrl: NavController,
     private _service: PreferenciaService,
@@ -29,14 +28,23 @@ export class PreferenciaPage implements OnInit {
     this.dados = _navParams.data;
   }
 
-  ngOnInit(): void {
+  ionViewLoaded() {
     this.getPontosDeInteresse();
   }
 
-  ionViewDidEnter() {
-    this._app.setTitle(this.titulo);
+  ionViewWillEnter() { }
+
+  ionViewDidEnter() { 
     this.preferencia = this.preferencias[0];
   }
+
+  ionViewWillLeave() { }
+
+  ionViewDidLeave() { }
+
+  ionViewWillUnload() { }
+
+  ionViewDidUnload() { }
 
   carregarPreferencia(preferencia: Preferencia): void {
     this.preferencia = preferencia;

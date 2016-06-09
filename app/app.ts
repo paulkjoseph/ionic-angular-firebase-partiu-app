@@ -1,6 +1,6 @@
 import 'es6-shim';
 
-import { ViewChild, OnInit, Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { HTTP_PROVIDERS } from '@angular/http';
 
 import { ionicBootstrap, Events, Platform, Nav, MenuController, Modal, Alert } from 'ionic-angular';
@@ -20,7 +20,7 @@ import { RotaService } from './pages/rota';
 @Component({
   templateUrl: 'build/app.html'
 })
-class PartiuApp implements OnInit {
+class PartiuApp {
 
   @ViewChild(Nav) nav: Nav;
   rootPage: any = null;
@@ -36,9 +36,6 @@ class PartiuApp implements OnInit {
     private _platform: Platform,
     private _menu: MenuController,
     private _globalMethod: GlobalMethodService) {
-  }
-
-  ngOnInit(): void {
     this._platform.ready().then(() => {
       StatusBar.styleDefault();
       Splashscreen.hide();
@@ -60,9 +57,21 @@ class PartiuApp implements OnInit {
     });
   }
 
-  ionViewDidEnter() {
-      this.enableMenu(this.hasLoggedIn);
+  ionViewLoaded() { }
+
+  ionViewWillEnter() { }
+
+  ionViewDidEnter() { 
+    this.enableMenu(this.hasLoggedIn);
   }
+  
+  ionViewWillLeave() { }
+
+  ionViewDidLeave() { }
+
+  ionViewWillUnload() { }
+
+  ionViewDidUnload() { }
 
   openPage(page: MenuItem) {
     if (page.title.indexOf("Logout") !== -1) {
@@ -153,7 +162,7 @@ ionicBootstrap
   ],
   //-- Config
   {
-    prodMode: true,
+    prodMode: false,
     backButtonText: 'Voltar',
     monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Juno', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
     monthShortNames: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],

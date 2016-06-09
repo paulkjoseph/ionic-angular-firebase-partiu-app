@@ -1,4 +1,4 @@
-import { Component, OnInit }  from '@angular/core';
+import { Component }  from '@angular/core';
 import { NavParams, ViewController, NavController } from 'ionic-angular';
 
 import { RotaView } from '../rota';
@@ -8,7 +8,7 @@ import { MapaPage } from '../mapa';
 @Component({
   templateUrl: 'build/pages/rota-detail/rota-detail.component.html'
 })
-export class RotaDetailPage implements OnInit {
+export class RotaDetailPage {
 
   titulo: string = "Detalhes";
   rota: RotaView;
@@ -18,11 +18,22 @@ export class RotaDetailPage implements OnInit {
   constructor(private _navParams: NavParams,
     private _viewCtrl: ViewController,
     private _navCtrl: NavController) {
+    this.rota = _navParams.data;
   }
 
-  ngOnInit(): void {
-    this.rota = this._navParams.data;
-  }
+  ionViewLoaded() { }
+
+  ionViewWillEnter() { }
+
+  ionViewDidEnter() { }
+
+  ionViewWillLeave() { }
+
+  ionViewDidLeave() { }
+
+  ionViewWillUnload() { }
+
+  ionViewDidUnload() { }
 
   salvar(): void {
     this.dismiss();

@@ -10,7 +10,7 @@ import { Usuario, TipoPontoInteresse } from './';
 export class PreferenciaUsuario {
     id: number;
     constructor(public usuario: Usuario,
-                public tipoPontoInteresse: TipoPontoInteresse) {
-                    
-                }
+        public tipoPontoInteresse: TipoPontoInteresse) {
+
+    }
 }

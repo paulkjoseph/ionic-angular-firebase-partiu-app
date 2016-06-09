@@ -1,4 +1,4 @@
-import { Component, OnInit }  from '@angular/core';
+import { Component }  from '@angular/core';
 
 import { App, NavParams, ViewController } from 'ionic-angular';
 
@@ -9,7 +9,7 @@ import { TutorialDataProvider } from '../../providers/tutorial-data.provider';
 @Component({
   templateUrl: 'build/pages/tutorial/tutorial.component.html'
 })
-export class TutorialPage implements OnInit {
+export class TutorialPage {
 
   titulo: string = "Tutorial";
 
@@ -22,16 +22,24 @@ export class TutorialPage implements OnInit {
     private _navParams: NavParams,
     private _viewCtrl: ViewController,
     private _dataProvider: TutorialDataProvider) {
+    this.dados = _navParams.data;
   }
 
-  ngOnInit(): void {
-    this.dados = this._navParams.data;
+  ionViewLoaded() {
     this.getTutorials();
   }
 
-  ionViewDidEnter() {
-    this._app.setTitle(this.titulo);
-  }
+  ionViewWillEnter() { }
+
+  ionViewDidEnter() { }
+
+  ionViewWillLeave() { }
+
+  ionViewDidLeave() { }
+
+  ionViewWillUnload() { }
+
+  ionViewDidUnload() { }
 
   dismiss() {
     this._viewCtrl.dismiss(this.titulo);

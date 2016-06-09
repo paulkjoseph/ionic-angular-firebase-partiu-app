@@ -8,21 +8,21 @@ import { PREFERENCIA_URL } from '../shared';
 
 @Injectable()
 export class PreferenciaService {
-    
+
     constructor(private _http: Http) { }
 
     getPreferencias(): Observable<Preferencia[]> {
         let data = this._http.get(PREFERENCIA_URL);
         return data.map((response: Response) => <Preferencia[]>response.json())
-                    // .do(data => console.log('getPreferencias: ' +  JSON.stringify(data)))
-                    .catch(this.handleError);
+            // .do(data => console.log('getPreferencias: ' +  JSON.stringify(data)))
+            .catch(this.handleError);
     }
 
     getPreferencia(id: number): Observable<Preferencia> {
         return this.getPreferencias()
-                    .map((lista: Preferencia[]) => lista.find(obj => obj.id === id))
-                    // .do(data => console.log('getPreferencia: ' +  JSON.stringify(data)))
-                    .catch(this.handleError);;
+            .map((lista: Preferencia[]) => lista.find(obj => obj.id === id))
+            // .do(data => console.log('getPreferencia: ' +  JSON.stringify(data)))
+            .catch(this.handleError);;
     }
 
     private handleError(error: Response) {

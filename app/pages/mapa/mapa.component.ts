@@ -1,4 +1,4 @@
-import { Component, OnInit }  from '@angular/core';
+import { Component }  from '@angular/core';
 
 import { NavParams, NavController, Modal } from 'ionic-angular';
 
@@ -9,7 +9,7 @@ import { PreferenciaPage } from '../preferencia';
 @Component({
   templateUrl: 'build/pages/mapa/mapa.component.html'
 })
-export class MapaPage implements OnInit {
+export class MapaPage {
 
   titulo: string = "Mapa";
   mapa: any;
@@ -22,9 +22,21 @@ export class MapaPage implements OnInit {
     this.dados = this._navParams.data;
   }
 
-  ngOnInit(): void {
+  ionViewLoaded() {
     this.carregarMapa();
   }
+
+  ionViewWillEnter() { }
+
+  ionViewDidEnter() { }
+
+  ionViewWillLeave() { }
+
+  ionViewDidLeave() { }
+
+  ionViewWillUnload() { }
+
+  ionViewDidUnload() { }
 
   carregarPreferencias(): void {
     this._globalMethod.carregarPagina(PreferenciaPage, this.titulo, true, this._navCtrl);

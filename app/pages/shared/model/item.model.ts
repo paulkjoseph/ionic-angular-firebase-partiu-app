@@ -7,8 +7,8 @@
  */
 export class Item {
     id: number;
-    constructor(public descricao: string = "", 
-                public status: boolean = false){
-                    
-                }
+    constructor(public descricao: string = "",
+        public status: boolean = false) {
+
+    }
 }

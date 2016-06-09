@@ -1,4 +1,4 @@
-import { Component, OnInit }  from '@angular/core';
+import { Component }  from '@angular/core';
 import { NgClass } from '@angular/common';
 
 import { NavParams, NavController, Modal, Platform, ActionSheet, Alert } from 'ionic-angular';
@@ -13,10 +13,10 @@ import { RotaPage } from '../rota';
 
 @Component({
   templateUrl: 'build/pages/historico/historico-list.component.html',
-  pipes: [ AgendaFilterPipe ],
-  directives: [ NgClass ]
+  pipes: [AgendaFilterPipe],
+  directives: [NgClass]
 })
-export class HistoricoListPage implements OnInit {
+export class HistoricoListPage {
 
   titulo: string = "Históricos";
   todasAgendas: AgendaView[] = [];
@@ -34,12 +34,24 @@ export class HistoricoListPage implements OnInit {
     this.dados = this._navParams.data;
   }
 
-  ngOnInit(): void {
+  ionViewLoaded() {
     this.getAgendas();
   }
 
+  ionViewWillEnter() { }
+
+  ionViewDidEnter() { }
+
+  ionViewWillLeave() { }
+
+  ionViewDidLeave() { }
+
+  ionViewWillUnload() { }
+
+  ionViewDidUnload() { }
+
   atualizarLista(): void {
-      console.log('atualizarLista: ' +  JSON.stringify(this.segment ))
+    console.log('atualizarLista: ' + JSON.stringify(this.segment))
     if (this.segment === 'favoritas') {
       this.agendas = this.todasAgendas.filter((data: AgendaView) => (new Date(data.dataFim) < new Date()) && data.favorito);
     } else {

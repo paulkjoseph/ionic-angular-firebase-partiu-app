@@ -1,4 +1,4 @@
-import { Component, OnInit }  from '@angular/core';
+import { Component }  from '@angular/core';
 import { NavParams, NavController, Platform, ActionSheet, Alert } from 'ionic-angular';
 
 import { GlobalMethodService } from '../shared';
@@ -11,7 +11,7 @@ import { AgendaView } from '../agenda';
 @Component({
   templateUrl: 'build/pages/historico/historico.component.html'
 })
-export class HistoricoPage implements OnInit {
+export class HistoricoPage {
 
   titulo: string = "Históricos";
   historicos: Historico[] = [];
@@ -28,9 +28,21 @@ export class HistoricoPage implements OnInit {
     this.dados = this._navParams.data;
   }
 
-  ngOnInit(): void {
+  ionViewLoaded() {
     this.getHistoricos();
   }
+
+  ionViewWillEnter() { }
+
+  ionViewDidEnter() { }
+
+  ionViewWillLeave() { }
+
+  ionViewDidLeave() { }
+
+  ionViewWillUnload() { }
+
+  ionViewDidUnload() { }
 
   carregarAgendas(historico: Historico): void {
     this._globalMethod.carregarPagina(HistoricoListPage, historico, true, this._navCtrl);

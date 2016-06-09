@@ -1,4 +1,4 @@
-import { Component, OnInit }  from '@angular/core';
+import { Component }  from '@angular/core';
 
 import { NavParams } from 'ionic-angular';
 
@@ -10,7 +10,7 @@ import { NotificacaoPage } from '../notificacao';
 @Component({
   templateUrl: 'build/pages/principal/principal.component.html'
 })
-export class PrincipalPage implements OnInit {
+export class PrincipalPage {
 
   selectedIndex: number;
 
@@ -20,10 +20,21 @@ export class PrincipalPage implements OnInit {
   tab4Root: any = NotificacaoPage;
 
   constructor(private _navParams: NavParams) {
+    this.selectedIndex = _navParams.data.tabIndex || 0;
   }
 
-  ngOnInit(): void {
-    this.selectedIndex = this._navParams.data.tabIndex || 0;
-  }
+  ionViewLoaded() { }
+
+  ionViewWillEnter() { }
+
+  ionViewDidEnter() { }
+
+  ionViewWillLeave() { }
+
+  ionViewDidLeave() { }
+
+  ionViewWillUnload() { }
+
+  ionViewDidUnload() { }
 
 }

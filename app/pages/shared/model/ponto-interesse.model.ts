@@ -13,9 +13,9 @@ export class PontoInteresse {
     localizacao: string;
     observacao: string;
     constructor(public tipoPontoInteresse: TipoPontoInteresse,
-                public descricao: string = "") {
-                    
-                }
+        public descricao: string = "") {
+
+    }
 }
 
 /**
@@ -28,8 +28,8 @@ export class PontoInteresse {
 export class TipoPontoInteresse {
     id: number;
     constructor(public descricao: string = "") {
-                    
-                }
+
+    }
 }
 
 /**
@@ -44,11 +44,11 @@ export class TipoPontoInteresse {
 export class CaracteristicaTipoPontoInteresse {
     id: number;
     valor: string;
-    constructor(public tipoPontoInteresse: TipoPontoInteresse, 
-                public caracteristica: Caracteristica,
-                public obrigatorio: boolean = false) {
-                    
-                }
+    constructor(public tipoPontoInteresse: TipoPontoInteresse,
+        public caracteristica: Caracteristica,
+        public obrigatorio: boolean = false) {
+
+    }
 }
 
 /**
@@ -62,8 +62,8 @@ export class CaracteristicaTipoPontoInteresse {
 export class Caracteristica {
     id: number;
     constructor(public tipoDado: TipoDado, public descricao: string = "") {
-                    
-                }
+
+    }
 }
 
 /**
@@ -77,6 +77,6 @@ export class Caracteristica {
 export class TipoDado {
     id: number;
     constructor(public descricao: string = "") {
-                    
-                }
+
+    }
 }

@@ -1,31 +1,37 @@
-import { Component, OnInit }  from '@angular/core';
+import { Component }  from '@angular/core';
 
-import { App, NavParams, ViewController } from 'ionic-angular';
+import { NavParams, ViewController } from 'ionic-angular';
 
 import { UsuarioView } from './';
 
 @Component({
   templateUrl: 'build/pages/usuario/usuario-signup.component.html',
 })
-export class UsuarioSignUpPage implements OnInit {
+export class UsuarioSignUpPage {
 
   titulo: string = "Login";
   dados: any;
   usuario: UsuarioView = new UsuarioView();
   mensagenErro: any;
 
-  constructor(private _app: App,
-    private _navParams: NavParams,
+  constructor(private _navParams: NavParams,
     private _viewCtrl: ViewController) {
     this.dados = this._navParams.data;
   }
 
-  ngOnInit(): void {
-  }
+  ionViewLoaded() { }
 
-  ionViewDidEnter() {
-    this._app.setTitle(this.titulo);
-  }
+  ionViewWillEnter() { }
+
+  ionViewDidEnter() { }
+
+  ionViewWillLeave() { }
+
+  ionViewDidLeave() { }
+
+  ionViewWillUnload() { }
+
+  ionViewDidUnload() { }
 
   login() {
     this.dismiss();

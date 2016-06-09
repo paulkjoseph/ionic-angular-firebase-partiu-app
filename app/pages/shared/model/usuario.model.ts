@@ -10,9 +10,10 @@
 export class Usuario {
     id: string;
     constructor(public nome: string = "",
-                public senha: string = "", 
-                public email: string = "",
-                public alias: string = "") {
-                    
-                }
+        public senha: string = "",
+        public email: string = "",
+        public alias: string = "",
+        public avatar: string = "") {
+
+    }
 }

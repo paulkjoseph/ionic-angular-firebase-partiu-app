@@ -14,13 +14,13 @@ import { Usuario, PontoInteresse } from './';
 export class AvaliacaoUsuario {
     id: number;
     constructor(public usuario: Usuario,
-                public pontoInteresse: PontoInteresse,
-                public avaliacao: Avaliacao,
-                public comentario: string = "",
-                public recomendar: boolean,
-                public dataAvaliacao: Date) {
-                    
-                }
+        public pontoInteresse: PontoInteresse,
+        public avaliacao: Avaliacao,
+        public comentario: string = "",
+        public recomendar: boolean,
+        public dataAvaliacao: Date) {
+
+    }
 }
 
 /**
@@ -32,6 +32,6 @@ export class AvaliacaoUsuario {
 export class Avaliacao {
     id: number;
     constructor(public descricao: string = "") {
-                    
-                }
+
+    }
 }

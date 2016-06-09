@@ -1,11 +1,11 @@
-import { Component, OnInit }  from '@angular/core';
+import { Component }  from '@angular/core';
 
 import { App, NavParams, ViewController } from 'ionic-angular';
 
 @Component({
   templateUrl: 'build/pages/sobre/sobre.component.html',
 })
-export class SobrePage implements OnInit {
+export class SobrePage {
 
   titulo: string = "Sobre";
 
@@ -16,12 +16,19 @@ export class SobrePage implements OnInit {
     private _viewCtrl: ViewController) {
   }
 
-  ngOnInit(): void {
-  }
+  ionViewLoaded() { }
 
-  ionViewDidEnter() {
-    this._app.setTitle(this.titulo);
-  }
+  ionViewWillEnter() { }
+
+  ionViewDidEnter() { }
+
+  ionViewWillLeave() { }
+
+  ionViewDidLeave() { }
+
+  ionViewWillUnload() { }
+
+  ionViewDidUnload() { }
 
   dismiss() {
     this._viewCtrl.dismiss(this.titulo);

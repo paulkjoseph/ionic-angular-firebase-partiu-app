@@ -1,13 +1,13 @@
-import { Component, OnInit }  from '@angular/core';
+import { Component }  from '@angular/core';
 
-import { App, NavParams, ViewController, Alert, NavController, ActionSheet, Platform } from 'ionic-angular';
+import { NavParams, ViewController, Alert, NavController, ActionSheet, Platform } from 'ionic-angular';
 
 import { Item } from '../shared';
 
 @Component({
   templateUrl: 'build/pages/bagagem/bagagem.component.html',
 })
-export class BagagemPage implements OnInit {
+export class BagagemPage {
 
   titulo: string = "Bagagem";
   dados: any;
@@ -16,22 +16,30 @@ export class BagagemPage implements OnInit {
 
   private mensagenErro: any;
 
-  constructor(private _app: App,
-    private _navParams: NavParams,
+  constructor(private _navParams: NavParams,
     private _viewCtrl: ViewController,
     private _navCtrl: NavController,
     private _platform: Platform) {
+    this.dados = _navParams.data;
   }
 
-  ngOnInit(): void {
-    this.dados = this._navParams.data;
+  ionViewLoaded() {
     this.getBagagem();
   }
 
+  ionViewWillEnter() { }
+
   ionViewDidEnter() {
-    this._app.setTitle(this.titulo);
     this.gerenciarContador();
   }
+
+  ionViewWillLeave() { }
+
+  ionViewDidLeave() { }
+
+  ionViewWillUnload() { }
+
+  ionViewDidUnload() { }
 
   salvar(): void {
     this.dismiss();

@@ -1,4 +1,4 @@
-import { Component, OnInit }  from '@angular/core';
+import { Component }  from '@angular/core';
 import { NgClass } from '@angular/common';
 import { NavParams, NavController, Modal, ActionSheet, Platform, Toast, Alert } from 'ionic-angular';
 
@@ -19,9 +19,9 @@ import { AgendaDetailPage } from '../agenda-detail';
   templateUrl: 'build/pages/agenda/agenda.component.html',
   pipes: [AgendaFilterPipe],
   directives: [NgClass],
-  providers: [ UserDataProvider ]
+  providers: [UserDataProvider]
 })
-export class AgendaPage implements OnInit {
+export class AgendaPage {
 
   titulo: string = "Agendas";
   usuario: UsuarioView;
@@ -31,18 +31,30 @@ export class AgendaPage implements OnInit {
   mensagenErro: any = null;
 
   constructor(private _navParams: NavParams,
-              private _navCtrl: NavController,
-              private _platform: Platform,
-              private _userData: UserDataProvider,
-              private _service: AgendaService,
-              public _globalMethod: GlobalMethodService) {
+    private _navCtrl: NavController,
+    private _platform: Platform,
+    private _userData: UserDataProvider,
+    private _service: AgendaService,
+    public _globalMethod: GlobalMethodService) {
     this.dados = _navParams.data;
   }
 
-  ngOnInit(): void {
+  ionViewLoaded() {
     this.getUsuario();
     this.getAgendas();
   }
+
+  ionViewWillEnter() { }
+
+  ionViewDidEnter() { }
+
+  ionViewWillLeave() { }
+
+  ionViewDidLeave() { }
+
+  ionViewWillUnload() { }
+
+  ionViewDidUnload() { }
 
   marcarComoFavorito(agenda: AgendaView): void {
     agenda.favorito = !agenda.favorito;
@@ -149,15 +161,15 @@ export class AgendaPage implements OnInit {
   private getAgendas(): void {
     this._service.getAgendasARealizar()
       .subscribe(
-        (data: AgendaView[]) => { //-- on sucess
-          this.agendas = data;
-        },
-        error => { //-- on error
-          this._globalMethod.mostrarErro(this.mensagenErro = <any>error, this._navCtrl);
-        },
-        () => { //-- on completion
+      (data: AgendaView[]) => { //-- on sucess
+        this.agendas = data;
+      },
+      error => { //-- on error
+        this._globalMethod.mostrarErro(this.mensagenErro = <any>error, this._navCtrl);
+      },
+      () => { //-- on completion
 
-        }
+      }
       );
   }
 

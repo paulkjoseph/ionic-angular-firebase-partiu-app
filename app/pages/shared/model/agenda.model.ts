@@ -12,13 +12,13 @@ import { Usuario } from './';
 export class Agenda {
     id: number;
     constructor(public usuario: Usuario,
-                public tipoAgenda: TipoAgenda,
-                public descricao: string = "",
-                public dataInicio: string = "",
-                public dataFim: string = "",
-                public dataCriacao: string = "") {
-                    
-                }
+        public tipoAgenda: TipoAgenda,
+        public descricao: string = "",
+        public dataInicio: string = "",
+        public dataFim: string = "",
+        public dataCriacao: string = "") {
+
+    }
 }
 
 /**
@@ -31,6 +31,6 @@ export class Agenda {
 export class TipoAgenda {
     id: number;
     constructor(public descricao: string = "") {
-                    
-                }
+
+    }
 }

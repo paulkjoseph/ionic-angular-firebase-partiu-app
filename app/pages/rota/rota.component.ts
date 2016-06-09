@@ -1,4 +1,4 @@
-import { Component, OnInit }  from '@angular/core';
+import { Component }  from '@angular/core';
 
 import { NavParams, NavController, Alert } from 'ionic-angular';
 
@@ -13,7 +13,7 @@ import { MapaPage } from '../mapa';
 @Component({
   templateUrl: 'build/pages/rota/rota.component.html'
 })
-export class RotaPage implements OnInit {
+export class RotaPage {
 
   titulo: string = "Rotas";
   agenda: AgendaView;
@@ -26,9 +26,21 @@ export class RotaPage implements OnInit {
     this.agenda = _navParams.data;
   }
 
-  ngOnInit(): void {
+  ionViewLoaded() {
     this.getRotas();
   }
+
+  ionViewWillEnter() { }
+
+  ionViewDidEnter() { }
+
+  ionViewWillLeave() { }
+
+  ionViewDidLeave() { }
+
+  ionViewWillUnload() { }
+
+  ionViewDidUnload() { }
 
   incluir(): void {
     this._navCtrl.push(RotaCreatePage, this.agenda);

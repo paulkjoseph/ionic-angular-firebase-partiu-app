@@ -1,4 +1,4 @@
-import { Component, OnInit }  from '@angular/core';
+import { Component }  from '@angular/core';
 
 import { App, NavParams, NavController, ViewController } from 'ionic-angular';
 
@@ -12,15 +12,14 @@ import { GlobalMethodService } from '../shared';
   templateUrl: 'build/pages/usuario/usuario-profile.component.html',
   providers: [UserDataProvider]
 })
-export class UsuarioProfilePage implements OnInit {
+export class UsuarioProfilePage {
 
   titulo: string = "Perfil";
   usuario: UsuarioView;
   dados: any;
   mensagenErro: any;
 
-  constructor(private _app: App,
-    private _navParams: NavParams,
+  constructor(private _navParams: NavParams,
     private _navCtrl: NavController,
     private _viewCtrl: ViewController,
     private _userData: UserDataProvider,
@@ -29,13 +28,21 @@ export class UsuarioProfilePage implements OnInit {
     this.dados = this._navParams.data;
   }
 
-  ngOnInit(): void {
+  ionViewLoaded() {
     this.getUsuario();
   }
 
-  ionViewDidEnter() {
-    this._app.setTitle(this.titulo);
-  }
+  ionViewWillEnter() { }
+
+  ionViewDidEnter() { }
+
+  ionViewWillLeave() { }
+
+  ionViewDidLeave() { }
+
+  ionViewWillUnload() { }
+
+  ionViewDidUnload() { }
 
   salvar() {
     this._userData.setUsuario(this.usuario).then(

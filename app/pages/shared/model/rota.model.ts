@@ -19,13 +19,13 @@ export class Rota {
     distancia: string;
     duracao: string;
     constructor(public rotaPai: Rota,
-                public agenda: Agenda,
-                public pontoInteresse: PontoInteresse,
-                public transporte: Transporte,
-                public dataSaida: string = "",
-                public dataChegada: string = "",
-                public pontoPartida: string = "",
-                public pontoChegada: string = "") {
-                    
-                }
+        public agenda: Agenda,
+        public pontoInteresse: PontoInteresse,
+        public transporte: Transporte,
+        public dataSaida: string = "",
+        public dataChegada: string = "",
+        public pontoPartida: string = "",
+        public pontoChegada: string = "") {
+
+    }
 }
