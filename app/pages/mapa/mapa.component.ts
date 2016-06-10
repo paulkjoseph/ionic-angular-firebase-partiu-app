@@ -2,6 +2,8 @@ import { Component }  from '@angular/core';
 
 import { NavParams, NavController, Modal } from 'ionic-angular';
 
+import { Mapa, MapaService } from './';
+
 import { GlobalMethodService } from '../shared';
 
 import { PreferenciaPage } from '../preferencia';
@@ -12,12 +14,14 @@ import { PreferenciaPage } from '../preferencia';
 export class MapaPage {
 
   titulo: string = "Mapa";
+  pontosMapa: any;
   mapa: any;
   dados: any;
   mensagenErro: any;
 
   constructor(private _navParams: NavParams,
     private _navCtrl: NavController,
+    private _service: MapaService,
     private _globalMethod: GlobalMethodService) {
     this.dados = this._navParams.data;
   }
@@ -43,13 +47,43 @@ export class MapaPage {
   }
 
   private carregarMapa(): void {
-    let latLng = new google.maps.LatLng(-21.180555, -47.831665);
-    let mapOptions = {
-      center: latLng,
-      zoom: 15,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
-    this.mapa = new google.maps.Map(document.getElementById("map"), mapOptions);
+    this._service.getMapas()
+      .subscribe(
+      (data: Mapa[]) => { //-- on sucess
+        this.pontosMapa = data;
+      },
+      error => { //-- on error
+        this._globalMethod.mostrarErro(this.mensagenErro = <any>error, this._navCtrl);
+      },
+      () => { //-- on completion
+        let mapEle = document.getElementById('map');
+
+        let map = new google.maps.Map(mapEle, {
+          center: this.pontosMapa.find(d => d.center),
+          zoom: 13
+        });
+
+        this.pontosMapa.forEach(markerData => {
+          let infoWindow = new google.maps.InfoWindow({
+            content: `<h5>${markerData.name}</h5>`
+          });
+
+          let marker = new google.maps.Marker({
+            position: markerData,
+            map: map,
+            title: markerData.name
+          });
+
+          marker.addListener('click', () => {
+            infoWindow.open(map, marker);
+          });
+        });
+
+        google.maps.event.addListenerOnce(map, 'idle', () => {
+          mapEle.classList.add('show-map');
+        });
+      }
+      );
   }
 
 }

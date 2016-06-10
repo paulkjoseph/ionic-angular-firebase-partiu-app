@@ -30,4 +30,6 @@ export const TRANSPORTE_URL = 'data/mock-transporte.json';
 
 export const USUARIO_URL = 'data/mock-usuario.json';
 
+export const MAPA_URL = 'data/mock-mapa.json';
+
 

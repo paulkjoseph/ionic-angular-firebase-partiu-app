@@ -10271,12 +10271,18 @@ body {
 .historico ion-content.cards-bg {
   background-color: #f4f4f7; }
 
-.mapa .scroll {
-  height: 100%; }
+.mapa ion-content {
+  background: #e5e3df; }
 
 .mapa #map {
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  opacity: 0;
+  -webkit-transition: opacity 150ms ease-in;
+  transition: opacity 150ms ease-in; }
+
+.mapa #map.show-map {
+  opacity: 1; }
 
 .notificacao ion-card[category=ionic] ion-card-content {
   border-left: 2px solid #387ef5;

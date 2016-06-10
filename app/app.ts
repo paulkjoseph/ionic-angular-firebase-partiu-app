@@ -16,6 +16,7 @@ import { UsuarioView, UsuarioService, UsuarioLoginPage } from './pages/usuario';
 import { HistoricoService } from './pages/historico';
 import { NotificacaoService } from './pages/notificacao';
 import { RotaService } from './pages/rota';
+import { MapaService } from './pages/mapa';
 
 @Component({
   templateUrl: 'build/app.html'
@@ -156,6 +157,7 @@ ionicBootstrap
     HistoricoService,
     NotificacaoService,
     RotaService,
+    MapaService,
     GlobalMethodService,
     GlobalVariableService,
     HTTP_PROVIDERS

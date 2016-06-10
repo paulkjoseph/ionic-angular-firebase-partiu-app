@@ -17,9 +17,9 @@ import { AgendaDetailPage } from '../agenda-detail';
 
 @Component({
   templateUrl: 'build/pages/agenda/agenda.component.html',
-  pipes: [AgendaFilterPipe],
-  directives: [NgClass],
-  providers: [UserDataProvider]
+  pipes: [ AgendaFilterPipe ],
+  directives: [ NgClass ],
+  providers: [ UserDataProvider ]
 })
 export class AgendaPage {
 
